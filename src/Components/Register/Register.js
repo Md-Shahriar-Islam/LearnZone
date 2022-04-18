@@ -4,33 +4,32 @@ import { Link, useNavigate } from 'react-router-dom';
 import { IoLogoGoogle, IoLogoGithub } from "react-icons/io";
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useSignInWithGoogle, useSignInWithGithub } from 'react-firebase-hooks/auth';
-import { useSendEmailVerification } from 'react-firebase-hooks/auth';
+import { useSendEmailVerification, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
+
 import auth from '../../firebase.init'
 
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [sendEmailVerification, sending, error] = useSendEmailVerification(
+    const [sendEmailVerification] = useSendEmailVerification(
         auth
     );
+
 
     const [
         createUserWithEmailAndPassword,
         user,
 
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [signInWithGoogle, user1, loading1, error1] = useSignInWithGoogle(auth);
     const [signInWithGithub, user2, loading2, error2] = useSignInWithGithub(auth);
     const navigate = useNavigate()
     const homeNavigate = () => {
         navigate('/home')
     }
-    const emailVerification = async () => {
-        await sendEmailVerification();
-        alert('Sent email');
-    }
-    const handleLogIn = async (event) => {
+
+    const handleLogIn = (event) => {
 
 
         createUserWithEmailAndPassword(email, password);
@@ -54,16 +53,16 @@ const Register = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control onChange={(e) => setEmail(e.target.value)} type="name" placeholder="Enter name" />
+                            <Form.Control type="name" placeholder="Enter name" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control value={email} type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
+                            <Form.Control value={email} type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" required />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control value={password} type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                            <Form.Control value={password} type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" required />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                             <Form.Label>Confirm Password</Form.Label>
@@ -81,7 +80,8 @@ const Register = () => {
 
                 </div>
                 <div className="d-flex justify-content-center mt-2">
-                    <p>Already Have an account<Link className="mx-2" to="/login">LogIn</Link></p>
+                    <p>Already Have an account<Link className="mx-2" to="/login">Register</Link></p>
+
                 </div>
                 <div className='d-flex justify-content-center align-items-center'>
                     <div className="border border-primary" style={{ width: '150px', borderRadius: '4px' }}></div>

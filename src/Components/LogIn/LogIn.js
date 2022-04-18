@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoLogoGoogle, IoLogoGithub } from "react-icons/io";
-import { useSignInWithGoogle, useSignInWithGithub } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithGithub, useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init'
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 
 const LogIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [sendPasswordResetEmail] = useSendPasswordResetEmail(
+        auth
+    );
     const [
         signInWithEmailAndPassword,
         user,
@@ -42,6 +48,11 @@ const LogIn = () => {
         signInWithEmailAndPassword(email, password);
         event.preventDefault();
     }
+    const resetPassword = async () => {
+        await sendPasswordResetEmail(email);
+        toast('Sent email');
+    }
+
     return (
         <div>
             <div className="w-25 mx-auto mt-5">
@@ -62,8 +73,10 @@ const LogIn = () => {
             </div>
             <div className="d-flex justify-content-center">
                 <Button onClick={handleSignIn} variant="primary" type="submit">
-                    Submit
+                    Login
                 </Button>
+                <button onClick={resetPassword} className="btn btn-link">forget-password</button>
+                <ToastContainer />
 
 
             </div>
