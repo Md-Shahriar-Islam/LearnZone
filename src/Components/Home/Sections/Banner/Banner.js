@@ -43,7 +43,7 @@ const Banner = () => {
 
                     <Carousel.Caption className="text-black">
                         <h3>LEARN TO SATISFY YOUR MIND</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                        <p>You will understand the core concept here.You will not just memorize some theory rather you will gain real knowledge which will make you eager to learn more.</p>
                     </Carousel.Caption>
                 </Carousel.Item>
             </Carousel>

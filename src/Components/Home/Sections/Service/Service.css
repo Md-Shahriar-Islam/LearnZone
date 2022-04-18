@@ -1,0 +1,17 @@
+.image {
+    width: 100%;
+    height: 200px;
+}
+
+.card {
+    box-shadow: 10px 10px 10px gray;
+}
+
+
+
+.list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+
+}

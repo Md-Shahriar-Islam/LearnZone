@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "image": "./Images/card1.webp",
+    "Course": "Academic one",
+    "providing": [
+      "one subject",
+      "Science",
+      "1 hour/day",
+      "12 day/Month",
+      "fees:5000"
+    ]
+  },
+  {
+    "id": 2,
+    "image": "./Images/card2.webp",
+    "course": "Academic two",
+    "providing": [
+      "two subjects",
+      "Science",
+      "2.5 hour/day",
+      "12 day/Month",
+      "fees:10000"
+    ]
+  },
+  {
+    "id": 3,
+    "image": "./Images/card3.webp",
+    "course": "Academic Combo",
+    "providing": [
+      "three three subjects",
+      "Science group",
+      "2.5 hour/day",
+      "16 day/Month",
+      "fees:12000"
+    ]
+  },
+  {
+    "id": 4,
+    "image": "./Images/card4.jpg",
+    "course": "Question Bank special",
+    "providing": [
+      "any one",
+      "Science group",
+      "2.5 hour/day",
+      "16 day/Month",
+      "fees:16000"
+    ]
+  },
+  {
+    "id": 5,
+    "image": "./Images/card5.webp",
+    "course": "Engineering Admission",
+    "providing": [
+      "All Sub",
+      "Science",
+      "2.5 hour/day",
+      "16 day/Month",
+      "fees:20000"
+    ]
+  },
+  {
+    "id": 6,
+    "image": "./Images/card6.webp",
+    "course": "varsity Admission",
+    "providing": [
+      "All Sub",
+      "Science",
+      "2.5 hour/day",
+      "16 day/Month",
+      "fees:18000"
+    ]
+  }
+]

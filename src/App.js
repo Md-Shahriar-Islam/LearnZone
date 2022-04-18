@@ -10,6 +10,7 @@ import About from "./Components/About/About"
 import LogIn from "./Components/LogIn/LogIn"
 import Register from "./Components/Register/Register"
 import Checkout from "./Components/Checkout/Checkout"
+import RequireAuth from "./Components/RequireAuth/RequireAuth"
 
 function App() {
   return (
@@ -22,13 +23,21 @@ function App() {
         <Route path="/blog" element={<Blogs />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/login" element={<LogIn />}></Route>
-        <Route path="/checkout" element={<Checkout />}></Route>
+        <Route
+          path="/checkout"
+          element={
+            <RequireAuth>
+              <Checkout />
+            </RequireAuth>
+          }
+        >
+        </Route>
         <Route path="/register" element={<Register />}></Route>
       </Routes>
 
       <Footer></Footer>
 
-    </div>
+    </div >
   );
 }
 

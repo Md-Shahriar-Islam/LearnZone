@@ -1,13 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IoLogoGoogle, IoLogoGithub } from "react-icons/io";
+import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle, useSignInWithGithub } from 'react-firebase-hooks/auth';
+import { useSendEmailVerification } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init'
 
 
 const Register = () => {
-    const name = (event) => {
-        console.log(event.target.value);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [sendEmailVerification, sending, error] = useSendEmailVerification(
+        auth
+    );
+
+    const [
+        createUserWithEmailAndPassword,
+        user,
+
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [signInWithGoogle, user1, loading1, error1] = useSignInWithGoogle(auth);
+    const [signInWithGithub, user2, loading2, error2] = useSignInWithGithub(auth);
+    const navigate = useNavigate()
+    const homeNavigate = () => {
+        navigate('/home')
     }
+    const emailVerification = async () => {
+        await sendEmailVerification();
+        alert('Sent email');
+    }
+    const handleLogIn = async (event) => {
+
+
+        createUserWithEmailAndPassword(email, password);
+
+
+
+        event.preventDefault();
+
+
+    }
+    if (user || user1 || user2) {
+        homeNavigate()
+
+    }
+
+
     return (
         <div>
             <div>
@@ -15,16 +54,16 @@ const Register = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control onBlur={name} type="name" placeholder="Enter name" />
+                            <Form.Control onChange={(e) => setEmail(e.target.value)} type="name" placeholder="Enter name" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control onBlur={name} type="email" placeholder="Enter email" />
+                            <Form.Control value={email} type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Enter email" />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control value={password} type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                             <Form.Label>Confirm Password</Form.Label>
@@ -36,10 +75,9 @@ const Register = () => {
 
                 </div>
                 <div className="d-flex justify-content-center">
-                    <Button variant="primary" type="submit">
-                        Submit
+                    <Button onClick={handleLogIn}>
+                        LOGIN
                     </Button>
-
 
                 </div>
                 <div className="d-flex justify-content-center mt-2">
@@ -51,14 +89,14 @@ const Register = () => {
                     <div className="border border-primary" style={{ width: '150px', borderRadius: '4px' }}></div>
                 </div>
                 <div className='d-flex justify-content-center mt-3'>
-                    <Button className='text-white shadow  p-2 bg-primary border-0 w-25 d-flex justify-content-center align-items-center'>
+                    <Button onClick={() => signInWithGoogle()} className='text-white shadow  p-2 bg-primary border-0 w-25 d-flex justify-content-center align-items-center'>
                         <IoLogoGoogle />
                         <span className='mx-2'> Register With Google</span>
 
                     </Button>
                 </div>
                 <div className='d-flex justify-content-center mt-3'>
-                    <Button className=' p-2 shadow bg-white text-dark border-0 w-25 d-flex justify-content-center align-items-center'>
+                    <Button onClick={() => signInWithGithub()} className=' p-2 shadow bg-white text-dark border-0 w-25 d-flex justify-content-center align-items-center'>
                         <IoLogoGithub />
                         <span className='mx-2'> Register With Github</span>
 
