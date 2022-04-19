@@ -1,6 +1,7 @@
 import React from 'react';
+import Reviews from './Reviews/Reviews';
 import Banner from './Sections/Banner/Banner';
-import Query from './Sections/Query/Query';
+
 import Services from './Sections/Services/Services';
 
 
@@ -10,7 +11,8 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <Services></Services>
-            <Query></Query>
+            <Reviews></Reviews>
+
 
 
         </div>

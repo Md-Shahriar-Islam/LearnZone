@@ -5,7 +5,9 @@
 * google and github sign in used
 * Email verification added 
 * log in with email and password added
-* toat message added to
+* toast message added 
+* protected route added 
+* sticky navbar added
 * for icons we have used react-icons
 * react-firebase hooks has used
 # github repo link
