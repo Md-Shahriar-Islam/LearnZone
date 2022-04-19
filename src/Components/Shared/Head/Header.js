@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import logo from "../../../images/logo/logo2.jpg"
 import auth from "../../../firebase.init"
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { BsFillBookFill } from 'react-icons/bs';
+import "./Header.css"
 
 const Header = () => {
     const [user] = useAuthState(auth);
@@ -15,7 +17,7 @@ const Header = () => {
         <div className="sticky-top">
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" >
                 <Container>
-                    <Navbar.Brand href="#home"><img style={{ height: "50px", width: "100px" }} src={logo}></img></Navbar.Brand>
+                    <Navbar.Brand as={Link} to="/home"><BsFillBookFill className="logo" /><span className="title">LearnZone</span></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
